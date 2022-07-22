@@ -122,9 +122,9 @@ class App
     end
     selected_person = gets.chomp.to_i
     puts 'Rented Books: '
-    return unless rental.person.id == selected_person
-
     @rentals.each do |rental|
+      next unless rental.person.id == selected_person
+
       puts "Date: #{rental.date}, Title: #{rental.book.title} Author: #{rental.book.author}"
     end
   end
