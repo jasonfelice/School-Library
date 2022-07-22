@@ -72,10 +72,20 @@ class App
 
     current_student = Student.new('N/A', student_age, student_name, parent_permission: student_permission)
     @people << current_student
-    puts "#{student_name} has been successfully added to the students list!"
+    puts "#{student_name} has been successfully added to the list!"
   end
 
-  def create_teacher; end
+  def create_teacher
+    puts 'Teacher\'s Name: '
+    name = gets.chomp
+    puts 'Teacher\'s Age: '
+    age = gets.chomp.to_i
+    puts 'Teacher\'s Specialization'
+    specialization = gets.chomp
+    teacher = Teacher.new(specialization, age, name)
+    @people << teacher
+    puts "#{name} has been successfully added to the list!"
+  end
 
   def create_book
     puts 'Create book Working!'
