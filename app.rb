@@ -24,7 +24,7 @@ class App
 
   def list_people
     puts '***People***'
-    puts "Opps! Can't find anyone. Create a person (option 3)." if @books.empty?
+    puts "Opps! Can't find anyone. Create a person (option 3)." if @people.empty?
     @people.each do |person|
       puts "Name: #{person.name} Age:#{person.age}"
     end
