@@ -23,7 +23,11 @@ class App
   end
 
   def list_people
-    puts 'List People Working!'
+    puts '***People***'
+    puts "Opps! Can't find anyone. Create a person (option 3)." if @books.empty?
+    @people.each do |person|
+      puts "#{person.name} by #{person.age}"
+    end
   end
 
   def list_books
@@ -35,7 +39,19 @@ class App
   end
 
   def create_person
-    puts 'Create person Working!'
+    puts 'Select one of the following options: '
+    puts '1 -> Create a teacher.'
+    puts '2 -> Create a student.'
+    person_option = gets.chomp
+
+    case person_option
+    when '1'
+      create_teacher
+    when '2'
+      create_student
+    else
+      puts "I don't understand..."
+    end
   end
 
   def create_book
