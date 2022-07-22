@@ -88,7 +88,13 @@ class App
   end
 
   def create_book
-    puts 'Create book Working!'
+    puts 'Book Title: '
+    title = gets.chomp
+    puts 'Book Author: '
+    author = gets.chomp
+    book = Book.new(title, author)
+    @books << book
+    puts "'#{title}' by '#{author}' has been successfully added to the book list"
   end
 
   def create_rental
