@@ -4,6 +4,7 @@ require './book'
 require './rental'
 require './classes/listpeople'
 require './classes/listbooks'
+require './classes/create_student'
 
 class App
   def initialize
@@ -51,24 +52,8 @@ class App
   end
 
   def create_student
-    puts 'Name: '
-    student_name = gets.chomp
-    puts 'Age: '
-    student_age = gets.chomp
-    puts 'Parent permission (y/n)'
-    student_permission = gets.chomp.strip.upcase
-    case student_permission
-    when 'Y'
-      student_permission = true
-    when 'N'
-      student_permission = false
-    else
-      puts "I don't understand..."
-    end
-
-    current_student = Student.new('N/A', student_age, student_name, parent_permission: student_permission)
-    @people << current_student
-    puts "#{student_name} has been successfully added to the list!"
+    student = CreateStudent.new.create
+    @people << student
   end
 
   def create_teacher
