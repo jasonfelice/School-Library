@@ -2,7 +2,8 @@ require './teacher'
 require './student'
 require './book'
 require './rental'
-require './classes/listpeople.rb'
+require './classes/listpeople'
+require './classes/listbooks'
 
 class App
   def initialize
@@ -29,11 +30,8 @@ class App
   end
 
   def list_books
-    puts '***Books***'
-    puts "Opps! You don't have any books. Try creating one (option 4)." if @books.empty?
-    @books.each do |book|
-      puts "#{book.title} by #{book.author}"
-    end
+    books = ListBooks.new(@books)
+    books.list
   end
 
   def create_person
