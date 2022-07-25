@@ -1,11 +1,9 @@
-require './teacher'
-require './student'
-require './book'
 require './rental'
 require './classes/listpeople'
 require './classes/listbooks'
 require './classes/create_student'
 require './classes/create_teacher'
+require './classes/create_book'
 
 class App
   def initialize
@@ -63,13 +61,8 @@ class App
   end
 
   def create_book
-    puts 'Book Title: '
-    title = gets.chomp
-    puts 'Book Author: '
-    author = gets.chomp
-    book = Book.new(title, author)
+    book = CreateBook.new.create
     @books << book
-    puts "'#{title}' by '#{author}' has been successfully added to the book list"
   end
 
   def create_rental
