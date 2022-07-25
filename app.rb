@@ -4,6 +4,7 @@ require './classes/create_student'
 require './classes/create_teacher'
 require './classes/create_book'
 require './classes/create_rental'
+require './classes/list_rentals'
 
 class App
   def initialize
@@ -70,17 +71,7 @@ class App
     @rentals << rental
   end
 
-  def list_rentals
-    puts 'Select person by ID: '
-    @people.each do |person|
-      puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
-    end
-    selected_person = gets.chomp.to_i
-    puts 'Rented Books: '
-    @rentals.each do |rental|
-      next unless rental.person.id == selected_person
-
-      puts "Date: #{rental.date}, Title: #{rental.book.title} Author: #{rental.book.author}"
-    end
+  def list_rental
+    ListRental.new
   end
 end
