@@ -1,9 +1,9 @@
-require './rental'
 require './classes/listpeople'
 require './classes/listbooks'
 require './classes/create_student'
 require './classes/create_teacher'
 require './classes/create_book'
+require './classes/create_rental'
 
 class App
   def initialize
@@ -66,21 +66,8 @@ class App
   end
 
   def create_rental
-    puts 'Select a book by its ID: '
-    @books.each_with_index do |book, index|
-      puts "ID: #{index}, Title: #{book.title}, Author: #{book.author}"
-    end
-    selected_book = gets.chomp.to_i
-    puts 'Select a person by ID: '
-    @people.each_with_index do |person, index|
-      puts "ID: #{index}, Name: #{person.name}, Age: #{person.age}"
-    end
-    selected_person = gets.chomp.to_i
-    puts 'Rental start date (yyyy/mm/dd): '
-    date = gets.chomp.to_s
-    rental = Rental.new(date, @books[selected_book], @people[selected_person])
+    rental = CreateRental.new(@books, @people).create
     @rentals << rental
-    puts 'Rental has been created successfully and added to the list.'
   end
 
   def list_rentals
