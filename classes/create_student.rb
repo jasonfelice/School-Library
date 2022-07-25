@@ -19,6 +19,6 @@ class CreateStudent
 
     current_student = Student.new('N/A', student_age, student_name, parent_permission: student_permission)
     puts "#{student_name} has been successfully added to the list!"
-    return current_student
+    current_student
   end
 end

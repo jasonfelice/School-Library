@@ -5,6 +5,7 @@ require './rental'
 require './classes/listpeople'
 require './classes/listbooks'
 require './classes/create_student'
+require './classes/create_teacher'
 
 class App
   def initialize
@@ -57,15 +58,8 @@ class App
   end
 
   def create_teacher
-    puts 'Teacher\'s Name: '
-    name = gets.chomp
-    puts 'Teacher\'s Age: '
-    age = gets.chomp.to_i
-    puts 'Teacher\'s Specialization'
-    specialization = gets.chomp
-    teacher = Teacher.new(specialization, age, name)
+    teacher = CreateTeacher.new.create
     @people << teacher
-    puts "#{name} has been successfully added to the list!"
   end
 
   def create_book
