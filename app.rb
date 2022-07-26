@@ -5,6 +5,8 @@ require './classes/create_teacher'
 require './classes/create_book'
 require './classes/create_rental'
 require './classes/list_rentals'
+require './teacher'
+require './student'
 require 'json'
 
 class App
@@ -12,7 +14,9 @@ class App
     @rentals = []
     @books = []
     @people = []
-    load_books
+    @books_path = './json/books.json'
+    @people_path = './json/people.json'
+    load_data
   end
 
   def run
@@ -30,17 +34,36 @@ class App
 
   def save_data
     save_books
+    save_people
   end
 
   def load_data
     load_books
+    load_people
   end
 
   def load_books
-    books = JSON.parse(File.read('./json/people.json'))
+    return unless File.exist?(@books_path)
+    return if File.empty?(@books_path)
+    books = JSON.parse(File.read(@books_path))
     books.each do |book|
       book = Book.new(book['title'], book['author'])
       @books << book
+    end
+  end
+
+  def load_people
+    return unless File.exist?(@people_path)
+    return if File.empty?(@people_path)
+    people_data = JSON.parse(File.read(@people_path))
+    people_data.each do |person|
+      if person.key?('specialization')
+        person_data = Teacher.new(person['specialization'], person['age'], person['name'], true)
+        @people << person_data
+      else
+        person_data = Student.new(person['classroom'], person['age'], person['name'], parent_permission: person['parent_permission'])
+        @people << person_data
+      end
     end
   end
 
@@ -49,8 +72,21 @@ class App
     @books.each do |book|
       books_data << {title: book.title, author: book.author}
     end
-    File.new('./json/people.json', 'w+') unless File.exist?('./json/people.json')
-    File.write('./json/people.json', JSON.generate(books_data))
+    File.new(@books_path, 'w+') unless File.exist?(@books_path)
+    File.write(@books_path, JSON.generate(books_data))
+  end
+
+  def save_people
+    people_data = []
+    @people.each do |person|
+      if person.is_a?(Teacher)
+        people_data << { specialization: person.specialization, age: person.age, name: person.name, parent_permission: true }
+      else
+        people_data << { classroom: person.classroom, age: person.age, name: person.name, parent_permission: person.parent_permission  }
+      end
+    end
+    File.new(@people_path, 'w+') unless File.exist?(@people_path)
+    File.write(@people_path, JSON.generate(people_data))
   end
 
   def list_people
