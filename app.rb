@@ -16,6 +16,7 @@ class App
     @people = []
     @books_path = './json/books.json'
     @people_path = './json/people.json'
+    @rentals_path = './json/rentals.json'
     load_data
   end
 
@@ -35,11 +36,13 @@ class App
   def save_data
     save_books
     save_people
+    save_rentals
   end
 
   def load_data
     load_books
     load_people
+    # load_rentals
   end
 
   def load_books
@@ -87,6 +90,19 @@ class App
     end
     File.new(@people_path, 'w+') unless File.exist?(@people_path)
     File.write(@people_path, JSON.generate(people_data))
+  end
+
+  def save_rentals
+    rentals_data = []
+    @rentals.each do |rental|
+      books = []
+      persons = []
+      p rental.book
+      # rental.books.each { |book| books.push({}) }
+      # rentals_data << {date: rental.date, book: rental.book, people: rental.person}
+    end
+    File.new(@rentals_path, 'w+') unless File.exist?(@rentals_path)
+    File.write(@rentals_path, JSON.generate(rentals_data))
   end
 
   def list_people
