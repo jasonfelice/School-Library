@@ -95,11 +95,7 @@ class App
   def save_rentals
     rentals_data = []
     @rentals.each do |rental|
-      books = []
-      persons = []
-      p rental.book
-      # rental.books.each { |book| books.push({}) }
-      # rentals_data << {date: rental.date, book: rental.book, people: rental.person}
+      rentals_data << {date: rental.date, book: rental.book.title, people: rental.person.name}
     end
     File.new(@rentals_path, 'w+') unless File.exist?(@rentals_path)
     File.write(@rentals_path, JSON.generate(rentals_data))
