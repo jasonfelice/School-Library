@@ -71,7 +71,8 @@ class App
     @rentals << rental
   end
 
-  def list_rental
-    ListRental.new
+  def list_rentals
+    rentals = ListRental.new(@people, @books)
+    rentals.list
   end
 end
