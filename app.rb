@@ -19,6 +19,8 @@ class App
       input = gets.chomp
       if input == '7'
         puts 'Have good day :)'
+        p @people
+        File.write('./json/people.json', @people)
         break
       end
       option(input)
