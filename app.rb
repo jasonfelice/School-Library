@@ -5,12 +5,14 @@ require './classes/create_teacher'
 require './classes/create_book'
 require './classes/create_rental'
 require './classes/list_rentals'
+require 'json'
 
 class App
   def initialize
     @rentals = []
     @books = []
     @people = []
+    load_books
   end
 
   def run
@@ -19,12 +21,36 @@ class App
       input = gets.chomp
       if input == '7'
         puts 'Have good day :)'
-        p @people
-        File.write('./json/people.json', @people)
+        save_data
         break
       end
       option(input)
     end
+  end
+
+  def save_data
+    save_books
+  end
+
+  def load_data
+    load_books
+  end
+
+  def load_books
+    books = JSON.parse(File.read('./json/people.json'))
+    books.each do |book|
+      book = Book.new(book['title'], book['author'])
+      @books << book
+    end
+  end
+
+  def save_books
+    books_data = []
+    @books.each do |book|
+      books_data << {title: book.title, author: book.author}
+    end
+    File.new('./json/people.json', 'w+') unless File.exist?('./json/people.json')
+    File.write('./json/people.json', JSON.generate(books_data))
   end
 
   def list_people
