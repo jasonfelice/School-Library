@@ -36,7 +36,7 @@ class Storage
 
   def save_books(data)
     books_data = data.books.map do |book|
-        { title: book.title, author: book.author}
+      { title: book.title, author: book.author }
     end
     json_data = JSON.generate(books_data)
     File.write('books.json', json_data)
@@ -44,7 +44,7 @@ class Storage
 
   def save_rentals(data)
     rentals_data = data.rentals.map do |rental|
-        { date: rental.date, book: rental.book, person: rental.person}
+      { date: rental.date, book: rental.book, person: rental.person }
     end
     json_data = JSON.generate(rentals_data)
     File.write('books.json', json_data)
