@@ -1,13 +1,15 @@
 require './nameable'
 
 class Decorator < Nameable
-  def initialize(obj)
+  attr_reader :nameable
+
+  def initialize(nameable)
     super()
-    @nameable = obj
+    @nameable = nameable
   end
 
   def correct_name
-    @namealbe.correct_name
+    @nameable.correct_name
   end
 end
 
