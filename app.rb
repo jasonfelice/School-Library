@@ -79,8 +79,8 @@ class App
     rentals_data = JSON.parse(File.read(@rentals_path))
     rentals_data.each do |rental|
       @rentals << Rental.new(rental['date'],
-                             @people.select { |person| person.name == rental['name'] }.first,
-                             @books.select { |book| book.title == rental['title'] }.first)
+                             @people.select { |person| person.name == rental['people'] }.first,
+                             @books.select { |book| book.title == rental['book'] }.first)
     end
   end
 
@@ -111,7 +111,7 @@ class App
   def save_rentals
     rentals_data = []
     @rentals.each do |rental|
-      rentals_data << { date: rental.date, book: rental.book.title, people: rental.person.name }
+      rentals_data << { date: rental.date, book: rental.person.title, people: rental.book.name }
     end
     File.new(@rentals_path, 'w+') unless File.exist?(@rentals_path)
     File.write(@rentals_path, JSON.generate(rentals_data))
