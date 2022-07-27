@@ -164,7 +164,7 @@ class App
   end
 
   def list_rentals
-    rentals = ListRental.new(@people, @books)
+    rentals = ListRental.new(@people, @rentals)
     rentals.list
   end
 end
