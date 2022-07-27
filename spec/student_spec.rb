@@ -1,6 +1,6 @@
 require_relative '../student'
 
-describe Student do 
+describe Student do
   it 'is an instance of Student class' do
     student = Student.new('SS1', '65', 'Chidinma', parent_permission: false)
     expect(student).to be_instance_of(Student)

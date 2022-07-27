@@ -1,6 +1,6 @@
 require_relative '../book'
 
-describe Book do 
+describe Book do
   it 'has a title' do
     book = Book.new('Subtle Art', 'Mark Manson')
     expect(book.title).to eq('Subtle Art')

@@ -1,11 +1,11 @@
 require_relative '../person'
 
-describe Person do 
+describe Person do
   it 'has a name' do
     person = Person.new(65, 'Chidinma')
     expect(person.name).to eq('Chidinma')
   end
-  
+
   it 'has age' do
     person = Person.new(65, 'Chidinma')
     expect(person.age).to eq(65)

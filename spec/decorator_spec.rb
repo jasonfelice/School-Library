@@ -7,7 +7,6 @@ describe Decorator do
   end
 end
 
-
 describe CapitalizeDecorator do
   it 'Capitalizes name' do
     decorator = CapitalizeDecorator.new('jakeandLekan')
